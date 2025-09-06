@@ -1,23 +1,36 @@
-import logo from './logo.svg';
+import React, { useState } from 'react';
 import './App.css';
+import Header from './layout/Header.js';
+import Footer from './layout/Footer.js';
+import Main from './layout/Main.js';
 
 function App() {
+  const [searchTerm, setSearchTerm] = useState('');
+
+  const handleSearchChange = (e) => {
+    setSearchTerm(e.target.value);
+  };
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <Header />
+
+      <div style={{ margin: '20px', textAlign: 'center' }}>
+        <label htmlFor="search" style={{ fontWeight: 'bold', marginBottom: 8, display: 'block' }}>
+          Поиск фильма:
+        </label>
+        <input
+          id="search"
+          type="text"
+          placeholder="Введите название фильма..."
+          value={searchTerm}
+          onChange={handleSearchChange}
+          style={{ padding: '8px 12px', width: '300px', fontSize: '16px' }}
+        />
+      </div>
+
+      <Main searchTerm={searchTerm} />
+      <Footer />
     </div>
   );
 }
