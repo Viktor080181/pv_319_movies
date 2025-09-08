@@ -6,9 +6,12 @@ import Main from './layout/Main.js';
 
 function App() {
   const [searchTerm, setSearchTerm] = useState('');
+  const [currentPage, setCurrentPage] = useState(1); // Текущая страница
+  const itemsPerPage = 10; // Количество фильмов на странице (можно изменить)
 
   const handleSearchChange = (e) => {
     setSearchTerm(e.target.value);
+    setCurrentPage(1); // Сбрасываем на первую страницу при новом поиске
   };
 
   return (
@@ -29,7 +32,13 @@ function App() {
         />
       </div>
 
-      <Main searchTerm={searchTerm} />
+      {/* Передаём currentPage и itemsPerPage в Main */}
+      <Main 
+        searchTerm={searchTerm} 
+        currentPage={currentPage} 
+        itemsPerPage={itemsPerPage} 
+        setCurrentPage={setCurrentPage}  // Функция для изменения страницы
+      />
       <Footer />
     </div>
   );
